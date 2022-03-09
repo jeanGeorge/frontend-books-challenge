@@ -9,6 +9,7 @@ Some technologies/tools used:
 - [Styled-components](https://styled-components.com/) for styling (it's important but without !important).
 - [Axios](https://github.com/axios/axios) for HTTP requests
 - [Storybook](https://storybook.js.org/) to doc components
+- [Cypress](https://docs.cypress.io/) for testing
 
 Below you can see how to configure and run the project locally and also my implementation decisions. Feel free to contact me for criticism or suggestions! My contacts are on my [profile](https://github.com/jeanGeorge).
 
