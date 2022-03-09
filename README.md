@@ -2,14 +2,15 @@
 Welcome! This project is a virtual bookshelf, created with some recent frontend web development technologies. You can take a look at the current result [here](https://bookschallenge.vercel.app/). 
 
 ## 👨‍💻 Stack
-Technologies/tools used:
+Some technologies/tools used:
 - [TypeScript](https://www.typescriptlang.org/): Just [JavaScript](https://www.javascript.com/) with types! How not to like scalability and safety?
 - [Next.js](https://nextjs.org/): A [React.js](https://reactjs.org/) framework for developing single page web applications. It's a personal choice, but with Next.js we have MANY benefits, such as Server Side Rendering, Static Site Generations, SEO improvements, among others...
-- [Context.API](https://reactjs.org/docs/context.html) to manage the application state.
-- [styled-components](https://styled-components.com/) for styling
+- [Context.API](https://reactjs.org/docs/context.html) to a easy state management.
+- [Styled-components](https://styled-components.com/) for styling (it's important but without !important).
+- [Axios](https://github.com/axios/axios) for HTTP requests
 - [Storybook](https://storybook.js.org/) to doc components
 
-Below you can see how to configure and run the project locally and also my implementation decisions. Feel free to contact me for criticism or suggestions! My contacts are on my profile.
+Below you can see how to configure and run the project locally and also my implementation decisions. Feel free to contact me for criticism or suggestions! My contacts are on my [profile](https://github.com/jeanGeorge).
 
 ## 🔧 Project setup
 First, run the development server:
