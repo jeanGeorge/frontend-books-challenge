@@ -1,12 +1,14 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  body {
+  * {
     margin: 0;
     padding: 0;
-    background: teal;
-    font-family: Heebo;
+    box-sizing: border-box;
+    outline: 0;
+	font-family: ${({ theme: { fonts } }) => fonts.family};
   }
+
 `;
 
 export default GlobalStyle;
