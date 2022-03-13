@@ -17,15 +17,14 @@ interface IAuthContext {
   user?: User;
   requesting: boolean;
   login: (email: string, password: string) => Promise<boolean>;
-  logout: () => boolean;
+  logout: () => Promise<void>;
 }
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 const AuthProvider: FC = ({ children }) => {
   const [requesting, setRequesting] = useState(false);
-  const [token, setToken] = useState('');
-  const [refreshToken, setRefreshToken] = useState('');
+
   const [user, setUser] = useState<User>();
 
   const [cookie, setCookie, removeCookie] = useCookies([
