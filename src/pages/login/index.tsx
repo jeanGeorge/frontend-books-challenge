@@ -6,7 +6,6 @@ import { useAuth } from 'hooks/useAuth';
 import { useEffect, useState } from 'react';
 import { parseCookies } from 'utils';
 import { GetServerSideProps } from 'next';
-import cookie from 'cookie';
 import { COOKIE_AUTH_TOKEN } from '../../constants';
 
 const Login = () => {
