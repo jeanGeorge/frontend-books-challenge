@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Wrapper = styled.div`
-  background-image: url(/images/background.png);
+  background-image: url(/images/login-background.png);
   background-repeat: no-repeat;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -54,14 +54,11 @@ const FormHeader = styled.div`
   flex-direction: row;
   margin-bottom: 50px;
 
-  a {
-    height: 36px;
-  }
-
   span {
     font-size: ${({ theme: { fonts } }) => fonts.sizes.large};
     color: ${({ theme: { colors } }) => colors.white};
     margin-left: 16.6px;
+    margin-bottom: 4px;
   }
 `;
 

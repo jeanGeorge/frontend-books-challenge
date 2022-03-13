@@ -1,38 +1,80 @@
-import { createContext, FC, useState } from 'react';
-import { User } from '../types/User';
+import { createContext, FC, useEffect, useState } from 'react';
+import { signIn } from 'services/authServices';
+import { useCookies } from 'react-cookie';
+import { useRouter } from 'next/router';
+import { NextResponse } from 'next/server';
+import baseApi from 'services/baseApi';
+import { User } from '../types/user';
+import {
+  COOKIE_AUTH_TOKEN,
+  COOKIE_REFRESH_TOKEN,
+  COOKIE_USER_KEY,
+} from '../constants';
 
 interface IAuthContext {
   token: string;
   refreshToken: string;
   user?: User;
-  login: () => boolean;
+  requesting: boolean;
+  login: (email: string, password: string) => Promise<boolean>;
   logout: () => boolean;
 }
 
-const DEFAULT_VALUE: IAuthContext = {
-  token: '',
-  refreshToken: '',
-  login: () => true,
-  logout: () => true,
-};
-
-const AuthContext = createContext<IAuthContext>(DEFAULT_VALUE);
+export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 const AuthProvider: FC = ({ children }) => {
+  const [requesting, setRequesting] = useState(false);
   const [token, setToken] = useState('');
   const [refreshToken, setRefreshToken] = useState('');
   const [user, setUser] = useState<User>();
 
-  function login() {
-    return true;
+  const [cookie, setCookie, removeCookie] = useCookies([
+    COOKIE_USER_KEY,
+    COOKIE_AUTH_TOKEN,
+    COOKIE_REFRESH_TOKEN,
+  ]);
+
+  const cookieConfig = {
+    path: '/',
+    maxAge: 3600,
+    sameSite: true,
+  };
+
+  const { push } = useRouter();
+
+  useEffect(() => {
+    setUser(cookie[COOKIE_USER_KEY]);
+  }, [cookie]);
+
+  async function login(email: string, password: string) {
+    let success = false;
+    try {
+      setRequesting(true);
+      const { data, headers, status } = await signIn(email, password);
+      setRequesting(false);
+      if (status === 200) {
+        success = true;
+        setCookie(COOKIE_AUTH_TOKEN, headers.authorization, cookieConfig);
+        setCookie(COOKIE_REFRESH_TOKEN, headers['refresh-token'], cookieConfig);
+        setCookie(COOKIE_USER_KEY, JSON.stringify(data as User), cookieConfig);
+        await push('/');
+      }
+      return success;
+    } catch (error) {
+      setRequesting(false);
+      return success;
+    }
   }
 
-  function logout() {
-    return true;
+  async function logout() {
+    removeCookie(COOKIE_AUTH_TOKEN);
+    removeCookie(COOKIE_REFRESH_TOKEN);
+    removeCookie(COOKIE_USER_KEY);
+    await push('/login');
   }
 
   return (
-    <AuthContext.Provider value={(token, refreshToken, user, login, logout)}>
+    <AuthContext.Provider value={{ requesting, user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

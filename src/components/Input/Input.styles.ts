@@ -46,10 +46,8 @@ const Wrapper = styled.div`
     transition: all 0.1s ease-in-out;
   }
 
-  /** active label */
   &.active {
     label {
-      //move the x coordinate and reduce size
       transform: translate(0, 4px) scale(0.75);
       margin-top: 4px;
     }

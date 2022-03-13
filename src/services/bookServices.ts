@@ -7,6 +7,7 @@ const api = baseApi;
 async function getPaginatedBooks(
   page: number,
   amount: number,
+  token: string,
   title?: string,
   category?: Category,
 ) {
@@ -15,8 +16,13 @@ async function getPaginatedBooks(
       `/books?page=${page}&amount=${amount}&title=${title ?? ''}&category=${
         category ?? ''
       }`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
     )
-    .then(response => response.data)
+    .then(response => response)
     .catch((error: AxiosError) => {
       throw error;
     });

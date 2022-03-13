@@ -2,13 +2,13 @@ import baseApi from './baseApi';
 
 const api = baseApi;
 
-async function login(email: string, password: string) {
+async function signIn(email: string, password: string) {
   return api
     .post('/auth/sign-in', {
       email,
       password,
     })
-    .then(response => response.data)
+    .then(response => response)
     .catch(err => {
       throw err;
     });
@@ -22,4 +22,4 @@ function refreshToken() {
       throw err;
     });
 }
-export { login, refreshToken };
+export { signIn, refreshToken };

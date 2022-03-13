@@ -1,7 +1,13 @@
 import { Wrapper, Form, FormRow, FormHeader } from 'styles/pages/login';
 import { useForm } from 'react-hook-form';
 
-import { Input, ToolTip, Button } from 'components';
+import { Input, ToolTip, Button, Logo } from 'components';
+import { useAuth } from 'hooks/useAuth';
+import { useEffect, useState } from 'react';
+import { parseCookies } from 'utils';
+import { GetServerSideProps } from 'next';
+import cookie from 'cookie';
+import { COOKIE_AUTH_TOKEN } from '../../constants';
 
 const Login = () => {
   const {
@@ -10,9 +16,9 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = () => {
-    console.log(errors);
-  };
+  const { login, requesting } = useAuth();
+
+  const [errorOnSubmit, setErrorOnSubmit] = useState(false);
 
   const emailRegister = {
     ...register('email', {
@@ -28,15 +34,24 @@ const Login = () => {
     ...register('password', { required: 'required' }),
   };
 
+  useEffect(() => {
+    if (requesting) {
+      setErrorOnSubmit(false);
+    }
+  }, [requesting]);
+
+  async function submit(data) {
+    const { email, password } = data;
+    const logged = await login(email, password);
+    setErrorOnSubmit(!logged);
+  }
+
   return (
-    <form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
+    <form autoComplete="off" onSubmit={handleSubmit(submit)}>
       <Wrapper>
         <Form>
           <FormHeader>
-            <a href="https://ioasys.com.br/">
-              <img alt="Ioasys" src="/images/logo.png" />
-            </a>
-            <span>Books</span>
+            <Logo fill="#FFFFFF" />
           </FormHeader>
           <FormRow>
             <Input
@@ -53,18 +68,35 @@ const Login = () => {
               label="Senha"
               register={passwordRegister}
             />
-            <Button type="submit" onClick={onSubmit}>
+            <Button type="submit" disabled={requesting}>
               Entrar
             </Button>
           </FormRow>
           <ToolTip
-            active={errors.email || errors.password}
+            active={errors.email || errors.password || errorOnSubmit}
             text="Email e/ou senha incorretos."
           />
         </Form>
       </Wrapper>
     </form>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+  const cookies = parseCookies(req);
+  const token = cookies[`${COOKIE_AUTH_TOKEN}`];
+
+  if (token) {
+    return {
+      redirect: {
+        destination: '/',
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
 };
 
 export default Login;

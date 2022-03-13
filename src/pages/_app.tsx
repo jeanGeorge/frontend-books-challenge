@@ -1,3 +1,4 @@
+import BookProvider from 'contexts/BookContext';
 import type { AppProps } from 'next/app';
 import { CookiesProvider } from 'react-cookie';
 import { ThemeProvider } from 'styled-components';
@@ -11,9 +12,11 @@ const App = ({ Component, pageProps }: AppProps) => {
     <ThemeProvider theme={theme}>
       <CookiesProvider>
         <AuthProvider>
-          <GlobalStyle />
-          <HtmlHeader />
-          <Component {...pageProps} />
+          <BookProvider>
+            <GlobalStyle />
+            <HtmlHeader />
+            <Component {...pageProps} />
+          </BookProvider>
         </AuthProvider>
       </CookiesProvider>
     </ThemeProvider>

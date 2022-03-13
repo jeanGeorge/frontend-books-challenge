@@ -1,6 +1,7 @@
-export type Book = {
+type Book = {
   id: string;
   title: string;
+  description: string;
   authors: Array<string>;
   pageCount: string;
   category: string;
@@ -11,3 +12,10 @@ export type Book = {
   publisher: string;
   published: number;
 };
+
+function getAuthors(book?: Book) {
+  return book?.authors.join(', ');
+}
+
+export { getAuthors };
+export type { Book };
