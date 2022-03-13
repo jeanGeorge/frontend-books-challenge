@@ -18,6 +18,7 @@ const Home = ({ data, page, totalPages }: PaginatedBooks) => {
     </Wrapper>
   );
 };
+
 export const getServerSideProps: GetServerSideProps = async ({
   req,
   query,
