@@ -12,8 +12,6 @@ import {
 } from '../constants';
 
 interface IAuthContext {
-  token: string;
-  refreshToken: string;
   user?: User;
   requesting: boolean;
   login: (email: string, password: string) => Promise<boolean>;
