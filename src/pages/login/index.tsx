@@ -90,6 +90,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
       redirect: {
         destination: '/',
       },
+      props: {},
     };
   }
 

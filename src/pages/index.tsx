@@ -31,6 +31,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       redirect: {
         destination: '/login',
       },
+      props: {},
     };
   }
 
@@ -61,6 +62,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       redirect: {
         destination: '/logout',
       },
+      props: {},
     };
   }
 };
