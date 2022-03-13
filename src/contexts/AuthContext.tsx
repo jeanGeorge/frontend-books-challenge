@@ -2,8 +2,7 @@ import { createContext, FC, useEffect, useState } from 'react';
 import { signIn } from 'services/authServices';
 import { useCookies } from 'react-cookie';
 import { useRouter } from 'next/router';
-import { NextResponse } from 'next/server';
-import baseApi from 'services/baseApi';
+
 import { User } from '../types/user';
 import {
   COOKIE_AUTH_TOKEN,

@@ -43,7 +43,7 @@ const Login = ({ unauthorized }: LoginProps) => {
     }
   }, [requesting]);
 
-  async function submit(data) {
+  async function submit(data: { email: any; password: any }) {
     const { email, password } = data;
     const logged = await login(email, password);
     setErrorOnSubmit(!logged);
