@@ -5,17 +5,21 @@ import { Input, ToolTip, Button, Logo } from 'components';
 import { useAuth } from 'hooks/useAuth';
 import { useEffect, useState } from 'react';
 import { parseCookies } from 'utils';
-import { GetServerSideProps } from 'next';
+import { GetServerSidePropsContext } from 'next';
 import { COOKIE_AUTH_TOKEN } from '../../constants';
 
-const Login = () => {
+interface LoginProps {
+  unauthorized: string;
+}
+
+const Login = ({ unauthorized }: LoginProps) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const { login, requesting } = useAuth();
+  const { login, requesting, clearCookies } = useAuth();
 
   const [errorOnSubmit, setErrorOnSubmit] = useState(false);
 
@@ -44,6 +48,12 @@ const Login = () => {
     const logged = await login(email, password);
     setErrorOnSubmit(!logged);
   }
+
+  useEffect(() => {
+    if (unauthorized === 'true') {
+      clearCookies();
+    }
+  }, []);
 
   return (
     <form autoComplete="off" onSubmit={handleSubmit(submit)}>
@@ -81,21 +91,28 @@ const Login = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
+export const getServerSideProps = async ({
+  req,
+  query,
+}: GetServerSidePropsContext) => {
   const cookies = parseCookies(req);
-  const token = cookies[`${COOKIE_AUTH_TOKEN}`];
+  let token = '';
+  if (cookies) {
+    token = cookies[`${COOKIE_AUTH_TOKEN}`];
+  }
 
-  if (token) {
+  const unauthorized = query?.unauthorized;
+
+  if (token && !unauthorized) {
     return {
       redirect: {
         destination: '/',
       },
-      props: {},
     };
   }
 
   return {
-    props: {},
+    props: { unauthorized: unauthorized ?? null },
   };
 };
 

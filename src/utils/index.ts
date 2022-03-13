@@ -6,10 +6,10 @@ import { NextApiRequestCookies } from 'next/dist/server/api-utils';
 function parseCookies(
   req: IncomingMessage & { cookies: NextApiRequestCookies },
 ) {
-  if (req) {
-    return cookie.parse(req.headers.cookie || '');
+  if (req?.headers?.cookie) {
+    return cookie.parse(req.headers.cookie);
   }
-  return document.cookie;
+  return null;
 }
 
 function getPageNumber(page: string | string[] | undefined) {

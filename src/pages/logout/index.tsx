@@ -1,5 +1,4 @@
 import { useAuth } from 'hooks/useAuth';
-import { GetServerSideProps } from 'next';
 import { useEffect } from 'react';
 
 const Logout = () => {
@@ -12,12 +11,11 @@ const Logout = () => {
   return null;
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps = async () => {
   return {
     redirect: {
-      destination: '/',
+      destination: '/login',
     },
-    props: {},
   };
 };
 

@@ -1,4 +1,4 @@
-import { GetServerSideProps } from 'next';
+import { GetServerSidePropsContext } from 'next';
 import { Content, Wrapper } from 'styles/pages/home';
 import { getPaginatedBooks } from 'services/bookServices';
 import { CardList, HomeHeader, HomeFooter, Modal } from 'components';
@@ -19,19 +19,21 @@ const Home = ({ data, page, totalPages }: PaginatedBooks) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({
+export const getServerSideProps = async ({
   req,
   query,
-}) => {
+}: GetServerSidePropsContext) => {
   const cookies = parseCookies(req);
-  const token = cookies[`${COOKIE_AUTH_TOKEN}`];
+  let token = '';
+  if (cookies) {
+    token = cookies[`${COOKIE_AUTH_TOKEN}`];
+  }
 
   if (!token) {
     return {
       redirect: {
         destination: '/login',
       },
-      props: {},
     };
   }
 
@@ -60,9 +62,8 @@ export const getServerSideProps: GetServerSideProps = async ({
   } catch (error) {
     return {
       redirect: {
-        destination: '/logout',
+        destination: '/login?unauthorized=true',
       },
-      props: {},
     };
   }
 };

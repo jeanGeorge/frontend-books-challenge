@@ -16,6 +16,7 @@ interface IAuthContext {
   requesting: boolean;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => Promise<void>;
+  clearCookies: () => void;
 }
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
@@ -63,15 +64,21 @@ const AuthProvider: FC = ({ children }) => {
     }
   }
 
-  async function logout() {
+  function clearCookies() {
     removeCookie(COOKIE_AUTH_TOKEN);
     removeCookie(COOKIE_REFRESH_TOKEN);
     removeCookie(COOKIE_USER_KEY);
+  }
+
+  async function logout() {
+    clearCookies();
     await push('/login');
   }
 
   return (
-    <AuthContext.Provider value={{ requesting, user, login, logout }}>
+    <AuthContext.Provider
+      value={{ requesting, user, login, logout, clearCookies }}
+    >
       {children}
     </AuthContext.Provider>
   );
