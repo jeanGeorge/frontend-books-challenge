@@ -9,7 +9,9 @@ Some technologies/tools used:
 - [Styled-components](https://styled-components.com/) for styling. 
 - [Axios](https://github.com/axios/axios) for HTTP requests
 - [Prettier](https://prettier.io/) + [ESLint](https://eslint.org/) for code formatting/pattern.
-- [Storybook](https://storybook.js.org/) to doc components
+
+For future work I intend to add::
+- [Storybook](https://storybook.js.org/) to doc components.
 - [Cypress](https://docs.cypress.io/) for testing
 
 Feel free to contact me for criticism or suggestions! My contacts are on my [profile](https://github.com/jeanGeorge).
