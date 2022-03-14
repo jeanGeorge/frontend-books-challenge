@@ -4,8 +4,8 @@ Welcome! This project is a virtual bookshelf, created with some recent frontend 
 ## 👨‍💻 Stack
 Some technologies/tools used:
 - [TypeScript](https://www.typescriptlang.org/): Just [JavaScript](https://www.javascript.com/) with types! How not to like scalability and safety?
-- [Next.js](https://nextjs.org/): A [React.js](https://reactjs.org/) framework for developing single page web applications. It's a personal choice, but with Next.js we have A LOT of benefits, such as Server Side Rendering, Static Site Generations, SEO improvements.
-- [Context.API](https://reactjs.org/docs/context.html) to a easy state management. State management here is quite simple (login and books), so it was easier to use the Context API. For more complex management I would probably use [Redux](https://redux.js.org/).
+- [Next.js](https://nextjs.org/): A [React.js](https://reactjs.org/) framework for developing single-page web applications. It's a personal choice, but with Next.js we have A LOT of benefits, such as Server Side Rendering, Static Site Generations, SEO improvements.
+- [Context.API](https://reactjs.org/docs/context.html) to easy state management. State management here is quite simple (login and books), so it was easier to use the Context API. For more complex management I would probably use [Redux](https://redux.js.org/).
 - [Styled-components](https://styled-components.com/) for styling. 
 - [Axios](https://github.com/axios/axios) for HTTP requests
 - [Prettier](https://prettier.io/) + [ESLint](https://eslint.org/) for code formatting/pattern.
