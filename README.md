@@ -10,7 +10,7 @@ Some technologies/tools used:
 - [Axios](https://github.com/axios/axios) for HTTP requests
 - [Prettier](https://prettier.io/) + [ESLint](https://eslint.org/) for code formatting/pattern.
 
-For future work I intend to add::
+For future work I intend to add:
 - [Storybook](https://storybook.js.org/) to doc components.
 - [Cypress](https://docs.cypress.io/) for testing
 
