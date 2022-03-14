@@ -1,6 +1,5 @@
 import cookie from 'cookie';
 import { IncomingMessage } from 'http';
-import PageLoader from 'next/dist/client/page-loader';
 import { NextApiRequestCookies } from 'next/dist/server/api-utils';
 
 function parseCookies(
