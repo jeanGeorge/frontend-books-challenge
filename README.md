@@ -15,7 +15,7 @@ Some technologies/tools used:
 Feel free to contact me for criticism or suggestions! My contacts are on my [profile](https://github.com/jeanGeorge).
 
 ## 🔧 Project setup
-This project was developed using (Node v14.17.0)[https://nodejs.org/ca/blog/release/v14.17.0/], NPM 8.4.1 and yarn 1.22.17.
+This project was developed using [Node v14.17.0](https://nodejs.org/ca/blog/release/v14.17.0/), NPM 8.4.1 and yarn 1.22.17.
 
 To set up first clone this repo:
 ```bash
