@@ -1,4 +1,4 @@
-# 📚 Frontend Books Challenge
+# 📚 Bookshelf Challenge
 Welcome! This project is a virtual bookshelf, created with some recent frontend web development technologies. You can take a look at the current application [here](https://bookschallenge.vercel.app/). 
 
 ## 👨‍💻 Stack
